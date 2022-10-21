@@ -4,24 +4,23 @@ const port = 5000;
 const bodyParser = require("body-parser");
 const { User } = require("./models/User");
 
+const config = require("./config/key");
 //application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 //application/json
 app.use(bodyParser.json());
 const mongoose = require("mongoose");
+
 mongoose
-  .connect(
-    "mongodb+srv://junho:sk770869@boilerplate.rvskyjs.mongodb.net/?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect(config.mongoURL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
-  res.send("Hello jn");
+  res.send("늦은 만큼 더 하면 된다");
 });
 
 app.post("/register", (req, res) => {
